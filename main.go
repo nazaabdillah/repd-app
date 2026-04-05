@@ -41,6 +41,9 @@ func main() {
 	r.GET("/ping", func(c *gin.Context) {
 		c.JSON(http.StatusOK, gin.H{"status": "success", "message": "REPD API is running."})
 	})
+	r.GET("/", func(c *gin.Context) {
+    c.JSON(http.StatusOK, gin.H{"status": "online", "message": "REPD API is running on cloud"})
+	})
 
 
 
@@ -61,5 +64,5 @@ func main() {
 		port = "8080" // Fallback jika dijalankan di lokal
 	}
 	fmt.Println("🚀 Server berjalan di port:", port)
-	r.Run(":" + port)
+	r.Run("0.0.0.0:" + port)
 }
