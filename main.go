@@ -25,9 +25,13 @@ func main() {
 	r := gin.Default()
 
 	// --- SETUP CORS ---
-	// Mengizinkan Next.js (port 3000) untuk mengakses API ini
+	allowOrigin := os.Getenv("ALLOWED_ORIGIN")
+	if allowOrigin == "" {
+		allowOrigin = "http://localhost:3000"
+	}
+
 	r.Use(cors.New(cors.Config{
-		AllowOrigins:     []string{"http://localhost:3000"},
+		AllowOrigins:     []string{allowOrigin},
 		AllowMethods:     []string{"GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"},
 		AllowHeaders:     []string{"Origin", "Content-Type", "Accept", "Authorization"},
 		ExposeHeaders:    []string{"Content-Length"},
